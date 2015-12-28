@@ -61,7 +61,7 @@ angular.module('leagueApp')
 
           //need a separate username variable without the two way binding
           summoner.username = res[summoner.name].name;
-          summoner.profileIconId = res[summoner.name].profileIconId;
+          summoner.profileIconSrc = "http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/"+res[summoner.name].profileIconId+".png";
           summoner.level = res[summoner.name].summonerLevel;
 
           $scope.getSummonerMasteries(summoner);
