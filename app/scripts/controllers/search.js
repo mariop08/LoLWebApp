@@ -52,17 +52,31 @@ angular.module('leagueApp')
     $scope.submitSummoner = function getSummonerID(summoner) {
 
       summoner.region = $scope.selectedRegion;
+      console.log(summoner.region);
 
       summonerFactory.getSummonerID(summoner)
         .success(function (res){
           summoner.id = res[summoner.name].id;
           console.log(summoner);
 
+          //need a separate username variable without the two way binding
+          summoner.username = res[summoner.name].name;
+          summoner.profileIconId = res[summoner.name].profileIconId;
+          summoner.level = res[summoner.name].summonerLevel;
+
           $scope.getSummonerMasteries(summoner);
           $scope.getSummonerRunes(summoner);
+
+          //for controlling ng-show directive in main.html
+          summoner.show = true;
+          summoner.error = false;
         })
         .error(function (error){
           console.log("Unable to get Summoner ID data: " + error.message);
+
+          //for controlling ng-show directive in main.html
+          summoner.error = true;
+          summoner.show = false;
         });
     };
 
