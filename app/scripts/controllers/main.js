@@ -14,4 +14,8 @@ angular.module('leagueApp')
       'AngularJS',
       'Karma'
     ];
+
+    //change the active navigation menu
+    angular.element('.nav li.active').removeClass('active');
+    angular.element('.nav li').eq(0).addClass('active');
   });
