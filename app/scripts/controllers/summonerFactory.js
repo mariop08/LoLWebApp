@@ -12,17 +12,17 @@ angular.module('leagueApp')
     var summonerFactory = {};
 
     summonerFactory.getSummonerID = function (summoner) {
-      return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'
+      return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/' + summoner.region + '/v1.4/summoner/by-name/'
         + summoner.name + key);
     };
 
     summonerFactory.getSummonerMasteries = function (summoner) {
-      return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/na/v1.4/summoner/'
+      return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/' + summoner.region + '/v1.4/summoner/'
         + summoner.id + '/masteries' + key);
     };
 
     summonerFactory.getSummonerRunes = function (summoner) {
-      return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/na/v1.4/summoner/'
+      return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/' + summoner.region + '/v1.4/summoner/'
         + summoner.id + '/runes' + key);
     };
     
