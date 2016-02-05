@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var Summoner = require('./models/summoner');
 var request = require('request');
 
+
 ////Imnportant KEY //////////////////////////////////////////////
 var https = 'https://';
 var key = '?api_key=29993728-af63-4ecd-84d8-fdd068d9d11a';
@@ -44,9 +45,14 @@ router.route('/matchlist/:summonername/:region')
             if(!error && response.statusCode == 200) {
               //FIX! Could not traverse JSON
               //Currently returning entire thing
+
+              //Fixed by parsing the body object!
+              
               //Add Create Summoner Record in DB
-              console.log(body[sname]);
-              res.send(body);
+              
+              var json = JSON.parse(body);
+              console.log(json[sname]);   //I can traverse the JSON object now  
+              res.send(json);
             }
         });
       }
