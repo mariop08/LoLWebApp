@@ -7,7 +7,7 @@
  * # AboutCtrl
  * Controller of the leagueApp
  */
-angular.module('leagueApp')
+leagueApp
   .controller('AboutCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
@@ -20,5 +20,3 @@ angular.module('leagueApp')
     angular.element('.nav li').eq(1).addClass('active');
 
   });
-
-

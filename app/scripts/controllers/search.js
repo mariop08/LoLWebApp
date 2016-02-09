@@ -7,11 +7,11 @@
  * # SearchBarCtrl
  * Controller of the leagueApp
  */
-angular.module('leagueApp')
+leagueApp
   .controller('SearchBarCtrl', ['$scope', '$http' , 'summonerFactory' , function ($scope, $http, summonerFactory) {
 
 	  $scope.regions = [
-					  'NA',
+					  'na',
 					  'KR',
 					  'LAN',
 					  'EUW',
@@ -22,7 +22,7 @@ angular.module('leagueApp')
 					  'LAS'
 					  ];
 
-	  $scope.selectedRegion = 'NA';
+	  $scope.selectedRegion = 'na';
 
 
 
@@ -49,12 +49,12 @@ angular.module('leagueApp')
 
     //}
 
-    $scope.submitSummoner = function getSummonerID(summoner) {
+    $scope.getMatchList = function(summoner) {
 
       summoner.region = $scope.selectedRegion;
-      console.log(summoner.region);
+      console.log(summoner.region + ' ' + summoner.name);
 
-      summonerFactory.getSummonerID(summoner)
+      summonerFactory.getMatchList(summoner)
         .success(function (res){
           summoner.id = res[summoner.name].id;
           console.log(summoner);
