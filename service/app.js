@@ -18,7 +18,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var port = process.env.PORT || 8082;
+var port = process.env.PORT || 8080;
 
 var router = express.Router();
 
@@ -42,10 +42,10 @@ router.route('/matchlist/:summonername/:region')
           https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
           + sname + key,
           function(error,response,body) {
-            if(!error && response.statusCode == 200) {            
+            if(!error && response.statusCode == 200) {
               var summonerInfo = JSON.parse(body);
               var summonerId = summonerInfo[sname].id;
-              
+
               //Add Create Summoner Record in DB
 
               //call get matchlist api
@@ -56,9 +56,12 @@ router.route('/matchlist/:summonername/:region')
                 function(error,response,body) {
                   if(!error && response.statusCode == 200) {
                     var matchlistInfo = JSON.parse(body);
+                    matchlistInfo.summoner = summonerInfo[sname];
+                    //matchlistInfor.matches.id = summonerId;
                     console.log("First match: ", matchlistInfo.matches[0]);
+                    console.log("Summoner Info: ", summonerInfo[sname]);
                     //returns an array of previous matches
-                    res.json(matchlistInfo.matches);
+                    res.json(matchlistInfo);
                   }
                   else {
                     //print error message
@@ -88,8 +91,9 @@ router.route('/match/:matchid/:region')
             + req.params.matchid + key,
             function(error,response,body) {
               if(!error && response.statusCode == 200) {
-                console.log(body);
-                res.send(body);
+                var match = JSON.parse(body);
+                console.log('Response Sent');
+                res.send(match);
               }
           });
       });
