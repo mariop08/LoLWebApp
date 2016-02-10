@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the leagueApp
  */
-angular.module('leagueApp')
+leagueApp
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

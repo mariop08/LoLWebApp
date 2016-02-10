@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var Summoner = require('./models/summoner');
 var request = require('request');
 
+
 ////Imnportant KEY //////////////////////////////////////////////
 var https = 'https://';
 var key = '?api_key=29993728-af63-4ecd-84d8-fdd068d9d11a';
@@ -17,7 +18,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var port = process.env.PORT || 8082;
+var port = process.env.PORT || 8080;
 
 var router = express.Router();
 
@@ -42,11 +43,33 @@ router.route('/matchlist/:summonername/:region')
           + sname + key,
           function(error,response,body) {
             if(!error && response.statusCode == 200) {
-              //FIX! Could not traverse JSON
-              //Currently returning entire thing
+              var summonerInfo = JSON.parse(body);
+              var summonerId = summonerInfo[sname].id;
+
               //Add Create Summoner Record in DB
-              console.log(body[sname]);
-              res.send(body);
+
+              //call get matchlist api
+              //https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/27930921?api_key=####
+              request(
+                https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v2.2/matchlist/by-summoner/'
+                + summonerId + key,
+                function(error,response,body) {
+                  if(!error && response.statusCode == 200) {
+                    var matchlistInfo = JSON.parse(body);
+                    matchlistInfo.summoner = summonerInfo[sname];
+                    //matchlistInfor.matches.id = summonerId;
+                    console.log("First match: ", matchlistInfo.matches[0]);
+                    console.log("Summoner Info: ", summonerInfo[sname]);
+                    //returns an array of previous matches
+                    res.json(matchlistInfo);
+                  }
+                  else {
+                    //print error message
+                  }
+                });
+            }
+            else {
+              res.send("ERROR: ", response.statusCode);
             }
         });
       }
@@ -68,8 +91,9 @@ router.route('/match/:matchid/:region')
             + req.params.matchid + key,
             function(error,response,body) {
               if(!error && response.statusCode == 200) {
-                console.log(body);
-                res.send(body);
+                var match = JSON.parse(body);
+                console.log('Response Sent');
+                res.send(match);
               }
           });
       });
