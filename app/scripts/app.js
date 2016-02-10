@@ -8,16 +8,17 @@
  *
  * Main module of the application.
  */
-angular
-  .module('leagueApp', [
+var leagueApp = angular.module('leagueApp',
+  [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+  ]);
+
+leagueApp.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -30,6 +31,6 @@ angular
         controllerAs: 'about'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/app'
       });
   });
