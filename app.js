@@ -34,7 +34,7 @@ router.get('/', function(req,res){
 //Gets Summoner ID from either DB or API
 //summonername: Summoner name which will be used to find ID
 //region: Region of summoner, must be provided for now, consider cookie or session variable to store
-router.route('/matchlist/:summonername/:region')
+router.route('/api/matchlist/:summonername/:region')
 
   .get(function(req,res){
     var sname = req.params.summonername;
@@ -53,7 +53,7 @@ router.route('/matchlist/:summonername/:region')
 
               //Add Create Summoner Record in DB
 
-              //call get matchlist api
+              //Call get matchlist api
               //https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/27930921?api_key=####
               request(
                 https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v2.2/matchlist/by-summoner/'
@@ -61,10 +61,8 @@ router.route('/matchlist/:summonername/:region')
                 function(error,response,body) {
                   if(!error && response.statusCode == 200) {
                     var matchlistInfo = JSON.parse(body);
+                    //Append Summoner Information to Matchlist Object
                     matchlistInfo.summoner = summonerInfo[sname];
-                    //matchlistInfor.matches.id = summonerId;
-                    console.log("First match: ", matchlistInfo.matches[0]);
-                    console.log("Summoner Info: ", summonerInfo[sname]);
                     //returns an array of previous matches
                     res.json(matchlistInfo);
                   }

@@ -32,23 +32,6 @@ leagueApp
       console.log($scope.selectedRegion);
     };
 
-    //$scope.submitSummoner = function (summoner) {
-
-    //  summoner.region = $scope.selectedRegion;
-
-      //$scope.summonerID = SearchService.idLookup(summoner);
-
-      //$http.get('https://'+summoner.region+'.api.pvp.net/api/lol/na/v1.4/summoner/by-name/'+summoner.name
-      //  +'?api_key=29993728-af63-4ecd-84d8-fdd068d9d11a')
-      //  .success(function(res) {
-      //    $scope.info = res[summoner.name];
-      //
-      //    console.log($scope.info);
-      //  });
-
-
-    //}
-
     $scope.getMatchList = function(summoner) {
 
       summoner.region = $scope.selectedRegion;
@@ -56,16 +39,16 @@ leagueApp
 
       summonerFactory.getMatchList(summoner)
         .success(function (res){
-          summoner.id = res[summoner.name].id;
+          summoner.id = res.summoner.id;
           console.log(summoner);
 
           //need a separate username variable without the two way binding
-          summoner.username = res[summoner.name].name;
-          summoner.profileIconSrc = "http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/"+res[summoner.name].profileIconId+".png";
-          summoner.level = res[summoner.name].summonerLevel;
+          summoner.username = res.summoner.name;
+          summoner.profileIconSrc = "http://ddragon.leagueoflegends.com/cdn/5.24.2/img/profileicon/"+ res.summoner.profileIconId+".png";
+          summoner.level = res.summoner.summonerLevel;
 
-          $scope.getSummonerMasteries(summoner);
-          $scope.getSummonerRunes(summoner);
+          //$scope.getSummonerMasteries(summoner);
+          //$scope.getSummonerRunes(summoner);
 
           //for controlling ng-show directive in main.html
           summoner.show = true;
@@ -80,26 +63,26 @@ leagueApp
         });
     };
 
-    $scope.getSummonerMasteries = function (summoner) {
-      summonerFactory.getSummonerMasteries(summoner)
-        .success( function (res) {
-          summoner.masteries = res[summoner.id].pages;
-          console.log(summoner.masteries);
-        })
-        .error(function (error) {
-          console.log("Unable to get Summoner Masteries: " + error.message);
-        });
-    };
-
-    $scope.getSummonerRunes = function (summoner) {
-      summonerFactory.getSummonerRunes(summoner)
-        .success( function (res) {
-          summoner.runes = res[summoner.id].pages;
-          console.log(summoner.runes);
-        })
-        .error(function (error) {
-          console.log("Unable to get Summoner Runes: " + error.message);
-        });
-    };
+    // $scope.getSummonerMasteries = function (summoner) {
+    //   summonerFactory.getSummonerMasteries(summoner)
+    //     .success( function (res) {
+    //       summoner.masteries = res.summoner.pages;
+    //       console.log(summoner.masteries);
+    //     })
+    //     .error(function (error) {
+    //       console.log("Unable to get Summoner Masteries: " + error.message);
+    //     });
+    // };
+    //
+    // $scope.getSummonerRunes = function (summoner) {
+    //   summonerFactory.getSummonerRunes(summoner)
+    //     .success( function (res) {
+    //       summoner.runes = res.summoner.pages;
+    //       console.log(summoner.runes);
+    //     })
+    //     .error(function (error) {
+    //       console.log("Unable to get Summoner Runes: " + error.message);
+    //     });
+    // };
 
   }]);
