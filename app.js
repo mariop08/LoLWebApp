@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/summoner');
+mongoose.connect('mongodb://localhost/leagueApp');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("Connected to DB");
+});
 
 var express = require('express');
 
@@ -38,11 +43,11 @@ router.route('/api/matchlist/:summonername/:region')
 
   .get(function(req,res){
     var sname = req.params.summonername;
-    Summoner.findOne({name: sname}, function(err, summoner) {
-      console.log(req.params);
+    Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
       if(err)
         res.send(err);
       else if(!summoner){
+        console.log('Summoner not found in DB, calling API');
         request(
           https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
           + sname + key,
@@ -52,6 +57,12 @@ router.route('/api/matchlist/:summonername/:region')
               var summonerId = summonerInfo[sname].id;
 
               //Add Create Summoner Record in DB
+              Summoner.create(summonerInfo[sname], function (err, res) {
+                if (err) return handleError(err);
+                // saved!
+                console.log('Record for Summoner:', summonerInfo[sname].name," was created.");
+                console.log(summonerInfo[sname]);
+              });
 
               //Call get matchlist api
               //https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/27930921?api_key=####
@@ -68,6 +79,8 @@ router.route('/api/matchlist/:summonername/:region')
                   }
                   else {
                     //print error message
+                    res.send("ERROR: ", response.statusCode);
+
                   }
                 });
             }
@@ -76,8 +89,27 @@ router.route('/api/matchlist/:summonername/:region')
             }
         });
       }
-      //If Summoner ID is found in the DB
-      //else{}
+      else {
+        //Call get matchlist api
+        //https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/27930921?api_k
+        console.log("Summmoner record found in DB: ", summoner["id"]);
+        request(
+          https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v2.2/matchlist/by-summoner/'
+          + summoner["id"] + key,
+          function(error,response,body) {
+            if(!error && response.statusCode == 200) {
+              var matchlistInfo = JSON.parse(body);
+              //Append Summoner Information to Matchlist Object
+              matchlistInfo.summoner = summoner;
+              //returns an array of previous matches
+              res.json(matchlistInfo);
+            }
+            else {
+              //print error message
+              res.send("ERROR: ", response.statusCode);
+            }
+          });
+      }
     });
   });
 
