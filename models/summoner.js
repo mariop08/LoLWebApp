@@ -3,12 +3,12 @@
  */
 
 var mongoose = require('mongoose');
-var SummonerSchema = mongoose.Schema({
-  summonerid: Number,
+var SummonerSchema = new mongoose.Schema({
+  id: Number,
   name: String,
   profileIconId: Number,
-  revisionDate: Number,
-  summonerLevel: Number
-});
+  summonerLevel: Number,
+  revisionDate: Number
+},{collection: 'Summoner'});
 
 module.exports = mongoose.model('Summoner', SummonerSchema);
