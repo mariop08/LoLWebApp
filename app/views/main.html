@@ -1,23 +1,145 @@
-
+<!-- 
 <div>
-	<div class="well" ng-show="summoner.show">
-	  <div class="text-center">
-	  	<h1><img src="{{summoner.profileIconSrc}}" width="40px" alt="profile icon"> {{summoner.username}} <small>{{summoner.id}}</small></h1>
-	  	<span class="label label-default">Level {{summoner.level}}</span>
-	  </div>
-	  <h2>Masteries</h2>
-	  <ol class="row">
-	  	<li class="col-lg-6" ng-repeat="mastery in summoner.masteries">{{mastery.name}}</li>
-	  </ol>
-	  <h2>Runes</h2>
-	  <ol class="row">
-	  	<li class="col-lg-6" ng-repeat="rune in summoner.runes">{{rune.name}}</li>
-	  </ol>
+<div class="well" ng-show="summoner.show">
+  <div class="text-center">
+  	<h1><img src="{{summoner.profileIconSrc}}" width="40px" alt="profile icon"> {{summoner.username}} <small>{{summoner.id}}</small></h1>
+  	<span class="label label-default">Level {{summoner.level}}</span>
+  </div>
+  <h2>Masteries</h2>
+  <ol class="row">
+  	<li class="col-lg-6" ng-repeat="mastery in summoner.masteries">{{mastery.name}}</li>
+  </ol>
+  <h2>Runes</h2>
+  <ol class="row">
+  	<li class="col-lg-6" ng-repeat="rune in summoner.runes">{{rune.name}}</li>
+  </ol>
+</div>
+
+<div class="jumbotron" ng-show="summoner.error">
+	<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
+</div>
+</div>
+-->
+<!-- <div ng-show="summoner.show"> -->
+<div>
+	<div class="row">
+		<div class="well col-md-12">
+			<img src="http://avatar.leagueoflegends.com/NA1/ahsomsid.png" width="60">
+			<label>ahsomsid</label>
+		</div>
 	</div>
+	<div class="lists">
+		<div class="well row">
+			<div class="game-summary">
+				<div class="champInfo col-md-2">
+					<div class="champ">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Malzahar.png" width="50">
+						<label>Malzahar</label>
+					</div>
+					<div class="spells">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png" width="20">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png" width="20">
+					</div>
+				</div>
+				<div class="gametype col-md-2">
+					<p>Summoner's Rift</p>
+					<p>Ranked(Draft Mode)</p>
+				</div>
+				<div class="items col-md-5">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+				</div>
+				<div class="kda col-md-1">
+					<p>9/12/10</p>
+				</div>
+				<div class="gold col-md-1">
+					<p>16.3k</p>
+				</div>
+				<div class="gametime col-md-1">
+					<p>44:21</p>
+				</div>
+			</div>
+			<span class="display-more glyphicon glyphicon-menu-down"></span>
+		</div>
 
-	<div class="jumbotron" ng-show="summoner.error">
-		<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
+		<div class="well row">
+			<div class="game-summary">
+				<div class="champInfo col-md-2">
+					<div class="champ">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Morgana.png" width="50">
+						<label>Morgana</label>
+					</div>
+					<div class="spells">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png" width="20">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png" width="20">
+					</div>
+				</div>
+				<div class="gametype col-md-2">
+					<p>Summoner's Rift</p>
+					<p>Ranked(Draft Mode)</p>
+				</div>
+				<div class="items col-md-5">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+				</div>
+				<div class="kda col-md-1">
+					<p>9/12/10</p>
+				</div>
+				<div class="gold col-md-1">
+					<p>16.3k</p>
+				</div>
+				<div class="gametime col-md-1">
+					<p>44:21</p>
+				</div>
+			</div>
+			<span class="display-more glyphicon glyphicon-menu-down"></span>
+		</div>
+
+		<div class="well row">
+			<div class="game-summary">
+				<div class="champInfo col-md-2">
+					<div class="champ">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Olaf.png" width="50">
+						<label>Olaf</label>
+					</div>
+					<div class="spells">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png" width="20">
+						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png" width="20">
+					</div>
+				</div>
+				<div class="gametype col-md-2">
+					<p>Summoner's Rift</p>
+					<p>Ranked(Draft Mode)</p>
+				</div>
+				<div class="items col-md-5">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+					<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/3092.png" width="50">
+				</div>
+				<div class="kda col-md-1">
+					<p>9/12/10</p>
+				</div>
+				<div class="gold col-md-1">
+					<p>16.3k</p>
+				</div>
+				<div class="gametime col-md-1">
+					<p>44:21</p>
+				</div>
+			</div>
+			<span class="display-more glyphicon glyphicon-menu-down"></span>
+		</div>
+
+
 	</div>
-
-
 </div>

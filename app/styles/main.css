@@ -81,3 +81,43 @@ body {
     border-bottom: 0;
   }
 }
+
+
+
+
+
+
+/* for search result page */
+.row {
+  margin: 0;
+  border-radius: 0;
+}
+
+.items img {
+  margin-bottom: 4px;
+}
+
+.champInfo {
+  
+}
+.champ {
+  float: left;
+  width: 75%;
+  overflow: hidden;
+}
+
+.spells {
+  float: left;
+  width: 25%;
+  overflow: hidden;
+}
+
+.display-more {
+  clear: left;
+  float: right;
+}
+
+/* remove search bar padding */
+#searchBar {
+  padding: 0;
+}
