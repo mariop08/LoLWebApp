@@ -20,8 +20,7 @@
 </div>
 </div>
 -->
-<!-- <div ng-show="summoner.show"> -->
-<div>
+<div ng-show="summoner.show">
 	<div class="row">
 		<div class="well col-md-12">
 			<img src="http://avatar.leagueoflegends.com/NA1/ahsomsid.png" width="60">
@@ -140,6 +139,9 @@
 			<span class="display-more glyphicon glyphicon-menu-down"></span>
 		</div>
 
-
 	</div>
+</div>
+
+<div class="jumbotron" ng-show="summoner.error">
+	<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
 </div>
