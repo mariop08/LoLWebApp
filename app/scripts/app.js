@@ -30,6 +30,11 @@ leagueApp.config(function ($routeProvider) {
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/match', {
+        templateUrl: 'views/match.html',
+        controller: 'MatchCtrl',
+        controllerAs: 'match'
+      })
       .otherwise({
         redirectTo: '/app'
       });

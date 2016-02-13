@@ -121,3 +121,33 @@ body {
 #searchBar {
   padding: 0;
 }
+
+
+/* for match page */
+
+table{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-collapse: collapse; 
+
+}
+
+td, th{
+  border: 1px solid lightgrey;
+  text-align: center;
+}
+
+td:first-child, td:nth-child(2) {
+  text-align: left;
+}
+
+
+.summonerName {
+  border-left: 0;
+}
+
+.champInfo {
+  border-right: 0;
+}
