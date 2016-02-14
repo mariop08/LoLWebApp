@@ -15,7 +15,8 @@ var leagueApp = angular.module('leagueApp',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angularDc'
   ]);
 
 leagueApp.config(function ($routeProvider) {
