@@ -80,6 +80,9 @@
       <div ng-view="">
         <!-- it looks like this is where all the templates from the views folder go in-->
       </div>
+      <h3>Total damage dealt by champion<small>(static data, this is placed in index.html)</small></h3>
+      <div id="pieChart1"></div>
+
 
     <div class="footer">
       <div class="container">
@@ -110,11 +113,9 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/lodash/dist/lodash.js"></script>
     <script src="bower_components/d3/d3.js"></script>
     <script src="bower_components/crossfilter/crossfilter.js"></script>
     <script src="bower_components/dcjs/dc.js"></script>
-    <script src="bower_components/angular-dc/dist/angular-dc.js"></script>
     
     <!-- endbower -->
     <!-- endbuild -->
@@ -126,6 +127,7 @@
         <script src="scripts/controllers/match.js"></script>  
 		    <script src="scripts/controllers/search.js"></script>
         <script src="scripts/controllers/summonerFactory.js"></script>
+        <script src="scripts/matchChart.js"></script>
         <!-- endbuild -->
 </body>
 </html>

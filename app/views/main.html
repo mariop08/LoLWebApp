@@ -23,8 +23,8 @@
 <div ng-show="summoner.show">
 	<div class="row">
 		<div class="well col-md-12">
-			<img src="http://avatar.leagueoflegends.com/NA1/ahsomsid.png" width="60">
-			<label>ahsomsid</label>
+			<img ng-src="{{summoner.profileIconSrc}}" width="60" alt="Summoner profile icon">
+			<label>{{summoner.username}}</label>
 		</div>
 	</div>
 	<div class="lists">
@@ -62,7 +62,7 @@
 					<p>44:21</p>
 				</div>
 			</div>
-			<span class="display-more glyphicon glyphicon-menu-down"></span>
+			<a href="" ng-click=""><span class="display-more glyphicon glyphicon-menu-down"></span></a>
 		</div>
 
 		<div class="well row">

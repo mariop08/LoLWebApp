@@ -8,11 +8,6 @@
  * Controller of the leagueApp
  */
 leagueApp
-  .controller('MatchCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-
-  });
+  .controller('MatchCtrl', ['$scope' , 'summonerFactory' , function ($scope, summonerFactory) {
+    
+  }]);
