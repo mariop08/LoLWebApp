@@ -8,7 +8,7 @@
  * Controller of the leagueApp
  */
 leagueApp
-  .controller('SearchBarCtrl', ['$scope', '$http' , 'summonerFactory' , function ($scope, $http, summonerFactory) {
+  .controller('SearchBarCtrl', ['$scope' , 'summonerFactory' , function ($scope, summonerFactory) {
 
 	  $scope.regions = [
 					  'na',
