@@ -13,6 +13,15 @@ leagueApp
       return $http.get('/api/matchlist/' + summoner.name + '/' + summoner.region);
     };
 
+    summonerFactory.getMatch = function (match) {
+      return $http.get('/api/match/' + match.matchid + '/' + match.region);
+    };
+
+    summonerFactory.getRecentGame = function (summoner) {
+      return $http.get('/api/recentgame/' + summoner.name + '/' + summoner.region);
+    };    
+
+
 
     // summonerFactory.getSummonerMasteries = function (summoner) {
     //   return $http.get(https+ summoner.region + '.api.pvp.net/api/lol/' + summoner.region + '/v1.4/summoner/'

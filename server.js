@@ -44,6 +44,7 @@ router.route('/api/matchlist/:summonername/:region')
   .get(function(req,res){
     var sname = req.params.summonername;
     Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
+      
       if(err)
         res.send(err);
       else if(!summoner){
@@ -112,6 +113,89 @@ router.route('/api/matchlist/:summonername/:region')
       }
     });
   });
+
+//Gets Recent Game Object
+
+router.route('/api/recentgame/:summonername/:region')
+    .get(function(req,res){
+      var sname = req.params.summonername;
+      Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
+        console.log(summoner);
+        if(err)
+          res.send(err);
+        else if(!summoner){
+          console.log('Summoner not found in DB, calling API');
+          console.log(https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
+            + sname + key);
+          request(
+            https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
+            + sname + key,
+            function(error,response,body) {
+              if(!error && response.statusCode == 200) {
+                //If the summoner name has a space in it, such as 'Ah Som', summonerInfo object will look like the following:
+                //{"ahsom":{"id":....}}
+                //In this case, calling summonerInfo["Ah Som"] will throw an error, so I'm setting summonerKey to "ahsom" 
+                //and using summonerKey("ahsom") instead of sname("Ah Som") to access the summonerInfo object
+                var summonerInfo = JSON.parse(body),
+                  summonerKey;
+                for(name in summonerInfo)
+                  summonerKey = name;
+                var summonerId = summonerInfo[summonerKey].id;
+
+                //Add Create Summoner Record in DB
+                Summoner.create(summonerInfo, function (err, res) {
+                  if (err) return handleError(err);
+                  // saved!
+                  console.log('Record for Summoner:', summonerInfo[summonerKey].name," was created.");
+                });
+
+                //Call get recentgame api
+                request(
+                  https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.3/game/by-summoner/'
+                + summonerId + '/recent' + key,
+                  function(error,response,body) {
+                    if(!error && response.statusCode == 200) {
+                      var recentGameInfo = JSON.parse(body);
+                      //append summoner info
+                      recentGameInfo.summonerInfo = summonerInfo[summonerKey];
+                      //returns an array of 1o recent matches
+                      res.json(recentGameInfo);
+                    }
+                    else {
+                      //print error message
+                      res.send("ERROR! ", response.statusCode);
+
+                    }
+                  });
+              }
+              else {
+                console.log(response.statusCode);
+                res.send("ERROR: ", response.statusCode);
+              }
+          });
+        }
+        else {
+          //Call get recentgame api
+          console.log("Summmoner record found in DB: ", summoner["id"]);
+          request(
+            https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.3/game/by-summoner/'
+                + summoner["id"] + '/recent' + key,
+            function(error,response,body) {
+              if(!error && response.statusCode == 200) {
+                var recentGameInfo = JSON.parse(body);
+                //append summoner info
+                recentGameInfo.summonerInfo = summoner;
+                //returns an array of 10 recent matches
+                res.json(recentGameInfo);
+              }
+              else {
+                //print error message
+                res.send("ERROR... ", response.statusCode);
+              }
+            });
+        }
+      });
+    });
 
 //Gets Match Object
 //matchid: Identifies match object that is requested

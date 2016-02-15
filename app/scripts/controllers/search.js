@@ -63,6 +63,28 @@ leagueApp
         });
     };
 
+    $scope.getRecentGame = function(summoner) {
+      summoner.region = $scope.selectedRegion;
+      summonerFactory.getRecentGame(summoner)
+        .success(function(res) {
+          console.log(res);
+          console.log(res.summonerInfo.name);
+          $scope.summonerInfo = res.summonerInfo;
+          $scope.recentGames = res.games;
+
+          //for controlling ng-show directive in main.html
+          summoner.show = true;
+          summoner.error = false;
+        })
+        .error(function (error){
+          console.log("Unable to get recent game data: " + error.message);
+
+          //for controlling ng-show directive in main.html
+          summoner.error = true;
+          summoner.show = false;
+        });
+    }
+
     // $scope.getSummonerMasteries = function (summoner) {
     //   summonerFactory.getSummonerMasteries(summoner)
     //     .success( function (res) {
