@@ -76,17 +76,27 @@ leagueApp
     var damageDim = ndx.dimension(function(d){return "champion "+d.championId+"'s total damage dealt:"+d.totalDamageDealt;});
     var damageGroup = damageDim.group().reduceSum(function(d) {return d.totalDamageDealt;});
 
+    //Custom Styling for Tool Tip for Pie Chart #1
+    var pieTip1 = d3.tip()
+      .attr('class','d3-tip')
+      .offset([-10,0])
+      .html(function (d) { return "<span style='color: #3369ff'>" +  d.data.key + "</span> : "  + d.data.value; });
+
     chart.width(450)
              .height(400)
              .transitionDuration(1000)
              .dimension(damageDim)
              .group(damageGroup)
              .radius(180)
-             .innerRadius(90)
+             .innerRadius(0)
              .minAngleForLabel(0)
              .renderLabel(false)
              .title(function(d){return d.key;});
 
     dc.renderAll();
+
+    d3.selectAll(".pie-slice").call(pieTip1);
+                  d3.selectAll(".pie-slice").on('mouseover', pieTip1.show)
+                      .on('mouseout', pieTip1.hide);
 
   }]);
