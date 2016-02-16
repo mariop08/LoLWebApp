@@ -61,7 +61,7 @@ chart.width(450)
          .innerRadius(90)
          .minAngleForLabel(0)
          .renderLabel(false)
-         .title(function(d){return d.key; });
+         .title(function(d){return d.key;});
 
 
-chart.render();
+dc.renderAll();
