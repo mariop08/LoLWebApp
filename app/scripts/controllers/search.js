@@ -22,7 +22,7 @@ leagueApp
 					  'LAS'
 					  ];
 
-	  $scope.selectedRegion = 'na';
+	  $scope.selectedRegion = 'NA';
 
 
 
@@ -34,7 +34,7 @@ leagueApp
 
     $scope.getMatchList = function(summoner) {
 
-      summoner.region = $scope.selectedRegion;
+      summoner.region = $scope.selectedRegion.toLowerCase();
       console.log(summoner.region + ' ' + summoner.name);
 
       summonerFactory.getMatchList(summoner)
