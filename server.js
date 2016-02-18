@@ -44,10 +44,12 @@ router.route('/api/matchlist/:summonername/:region')
   .get(function(req,res){
     var sname = req.params.summonername;
     Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
-
+      console.log(https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
+      + sname);
       if(err)
         res.send(err);
       else if(!summoner){
+        sname = req.params.summonername.toLowerCase().replace(/ /g,'');
         console.log('Summoner not found in DB, calling API');
         request(
           https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
@@ -55,6 +57,7 @@ router.route('/api/matchlist/:summonername/:region')
           function(error,response,body) {
             if(!error && response.statusCode == 200) {
               var summonerInfo = JSON.parse(body);
+              console.log(summonerInfo);
               var summonerId = summonerInfo[sname].id;
 
               //Add Create Summoner Record in DB
@@ -80,20 +83,22 @@ router.route('/api/matchlist/:summonername/:region')
                   }
                   else {
                     //print error message
-                    res.send("ERROR: ", response.statusCode);
+                    res.status(response.statusCode).send(body);
 
                   }
                 });
             }
             else {
-              res.send("ERROR: ", response.statusCode);
+              res.status(response.statusCode).send(body);
             }
         });
       }
       else {
         //Call get matchlist api
         //https://na.api.pvp.net/api/lol/na/v2.2/matchlist/by-summoner/27930921?api_k
-        console.log("Summmoner record found in DB: ", summoner["id"]);
+        console.log("Summmoner record found in DB: ", summoner, "\n");
+        console.log(https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v2.2/matchlist/by-summoner/'
+        + summoner["id"]+ key);
         request(
           https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v2.2/matchlist/by-summoner/'
           + summoner["id"] + key,
@@ -107,7 +112,7 @@ router.route('/api/matchlist/:summonername/:region')
             }
             else {
               //print error message
-              res.send("ERROR: ", response.statusCode);
+              res.status(response.statusCode).send(body);
             }
           });
       }
