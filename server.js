@@ -43,7 +43,8 @@ router.route('/api/matchlist/:summonername/:region')
 
   .get(function(req,res){
     var sname = req.params.summonername;
-    Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
+    //findOne({$or: [{name:"QuantumMiku"},{altname:"quantummiku"}]})
+    Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate altname', function(err, summoner) {
       console.log(https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
       + sname);
       if(err)
@@ -59,7 +60,8 @@ router.route('/api/matchlist/:summonername/:region')
               var summonerInfo = JSON.parse(body);
               console.log(summonerInfo);
               var summonerId = summonerInfo[sname].id;
-
+              summonerInfo[sname].altname = sname;
+              console.log(summonerInfo[sname].altname);
               //Add Create Summoner Record in DB
               Summoner.create(summonerInfo[sname], function (err, res) {
                 if (err) return handleError(err);
