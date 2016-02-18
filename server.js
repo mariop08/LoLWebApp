@@ -3,7 +3,7 @@ mongoose.connect('mongodb://localhost/leagueApp');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
-  console.log("Connected to DB");
+  console.log("Connected to MongoDB");
 });
 
 var express = require('express');
@@ -44,7 +44,7 @@ router.route('/api/matchlist/:summonername/:region')
   .get(function(req,res){
     var sname = req.params.summonername;
     Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
-      
+
       if(err)
         res.send(err);
       else if(!summoner){
@@ -115,12 +115,11 @@ router.route('/api/matchlist/:summonername/:region')
   });
 
 //Gets Recent Game Object
-
 router.route('/api/recentgame/:summonername/:region')
     .get(function(req,res){
       var sname = req.params.summonername;
       Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate', function(err, summoner) {
-        console.log(summoner);
+        //console.log(summoner);
         if(err)
           res.send(err);
         else if(!summoner){
@@ -134,7 +133,7 @@ router.route('/api/recentgame/:summonername/:region')
               if(!error && response.statusCode == 200) {
                 //If the summoner name has a space in it, such as 'Ah Som', summonerInfo object will look like the following:
                 //{"ahsom":{"id":....}}
-                //In this case, calling summonerInfo["Ah Som"] will throw an error, so I'm setting summonerKey to "ahsom" 
+                //In this case, calling summonerInfo["Ah Som"] will throw an error, so I'm setting summonerKey to "ahsom"
                 //and using summonerKey("ahsom") instead of sname("Ah Som") to access the summonerInfo object
                 var summonerInfo = JSON.parse(body),
                   summonerKey;
@@ -219,4 +218,4 @@ router.route('/api/match/:matchid/:region')
 app.use('/', router);
 
 app.listen(port);
-console.log('The shit at port ' + port);
+console.log('The server is running at port: ' + port);
