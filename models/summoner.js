@@ -8,7 +8,8 @@ var SummonerSchema = new mongoose.Schema({
   name: String,
   profileIconId: Number,
   summonerLevel: Number,
-  revisionDate: Number
+  revisionDate: Number,
+  altname: String
 },{collection: 'Summoner'});
 
 module.exports = mongoose.model('Summoner', SummonerSchema);
