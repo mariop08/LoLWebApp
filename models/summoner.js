@@ -10,6 +10,6 @@ var SummonerSchema = new mongoose.Schema({
   summonerLevel: Number,
   revisionDate: Number,
   altname: String
-},{collection: 'Summoner'});
+},{collection: 'Summoners'});
 
 module.exports = mongoose.model('Summoner', SummonerSchema);
