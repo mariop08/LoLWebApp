@@ -136,14 +136,8 @@ router.route('/api/recentgame/:summonername/:region')
             + sname + key,
             function(error,response,body) {
               if(!error && response.statusCode == 200) {
-                //If the summoner name has a space in it, such as 'Ah Som', summonerInfo object will look like the following:
-                //{"ahsom":{"id":....}}
-                //In this case, calling summonerInfo["Ah Som"] will throw an error, so I'm setting summonerKey to "ahsom"
-                //and using summonerKey("ahsom") instead of sname("Ah Som") to access the summonerInfo object
-                var summonerInfo = JSON.parse(body),
-                  summonerKey;
-                for(name in summonerInfo)
-                  summonerKey = name;
+                var summonerInfo = JSON.parse(body);
+                var summonerKey = req.params.summonername.toLowerCase().replace(/ /g,'');
                 var summonerId = summonerInfo[summonerKey].id;
 
                 //Add Create Summoner Record in DB
@@ -167,14 +161,14 @@ router.route('/api/recentgame/:summonername/:region')
                     }
                     else {
                       //print error message
-                      res.send("ERROR! ", response.statusCode);
+                      res.status(response.statusCode).send(body);
 
                     }
                   });
               }
               else {
                 console.log(response.statusCode);
-                res.send("ERROR: ", response.statusCode);
+                res.status(response.statusCode).send(body);
               }
           });
         }
@@ -194,7 +188,7 @@ router.route('/api/recentgame/:summonername/:region')
               }
               else {
                 //print error message
-                res.send("ERROR... ", response.statusCode);
+                res.status(response.statusCode).send(body);
               }
             });
         }
