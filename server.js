@@ -44,7 +44,7 @@ router.route('/api/matchlist/:summonername/:region')
   .get(function(req,res){
     var sname = req.params.summonername;
     //findOne({$or: [{name:"QuantumMiku"},{altname:"quantummiku"}]})
-    Summoner.findOne({name: sname},'-_id id name profileIconId summonerLevel revisionDate altname', function(err, summoner) {
+    Summoner.findOne([{name: sname}, {altname: sname.toLowerCase().replace(/ /g,'')}],'-_id id name profileIconId summonerLevel revisionDate altname', function(err, summoner) {
       console.log(https + req.params.region + '.api.pvp.net/api/lol/' + req.params.region + '/v1.4/summoner/by-name/'
       + sname);
       if(err)
