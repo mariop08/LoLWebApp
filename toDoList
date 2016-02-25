@@ -1,16 +1,10 @@
-Need to fix
-1. Right now we are calling findOne function with whatever value was entered in the search bar. So if I search the value 'Ahsomsid', Mongo will compare that with 'ahsomsid', return null bc 'Ahsomsid' != 'ahsomsid', and creates a new record in the db, which is not what we want. 
+Current Goals - Due in 1 week - 02/24/16
 
-The riot api, however, is not case sensitive and no matter if I search for 'ahsomsid' or 'Ahsomsid' or 'AhSOMSiD', it will still return 
-
-{"ahsomsid": {
-   "id": 27930921,
-   "name": "ahsomsid",
-   "profileIconId": 21,
-   "revisionDate": 1455593071000,
-   "summonerLevel": 30
-}}
-
-We need to save the name of that object in the db along with the rest of the summoner info, and use that value instead of user input to call the findOne function.
-
-(This approach will also take care of summoner names with spaces)
+1. Create Unit Tests for the current backend
+2. Update routes with better handling for incorrect input or unregistered routes
+3. Modularize routes, move them into their own files.
+4. Move over to Angular Material
+5. Add input validation(client side)
+6. Wrap simple graphs in directives
+7. Add middleware to track requests and limit number of requests
+8. Implement better logging, set standads. 
