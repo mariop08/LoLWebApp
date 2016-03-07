@@ -1,7 +1,7 @@
 Current Goals - Due in 1 week - 02/24/16
 
 1. Create Unit Tests for the current backend
-2. Update routes with better handling for incorrect input or unregistered routes
+2. Update routes with better handling for incorrect input or unregistered routes. //Completed
 3. Modularize routes, move them into their own files. //Completed
 4. Move over to Angular Material[working on it]
 5. Add input validation(client side)
