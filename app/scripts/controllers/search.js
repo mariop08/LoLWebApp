@@ -10,8 +10,10 @@
 leagueApp
   .controller('SearchBarCtrl', ['$scope' , 'summonerFactory' , function ($scope, summonerFactory) {
 
+    $scope.selectedRegion = 'NA';
+    
 	  $scope.regions = [
-					  'na',
+					  'NA',
 					  'KR',
 					  'LAN',
 					  'EUW',
@@ -22,7 +24,8 @@ leagueApp
 					  'LAS'
 					  ];
 
-	  $scope.selectedRegion = 'NA';
+	  
+
 
 
 
@@ -64,7 +67,8 @@ leagueApp
     };
 
     $scope.getRecentGame = function(summoner) {
-      summoner.region = $scope.selectedRegion;
+      $scope.selectedRegion = summoner.region;
+      // summoner.region = $scope.selectedRegion;
       summonerFactory.getRecentGame(summoner)
         .success(function(res) {
           console.log(res);
@@ -73,8 +77,8 @@ leagueApp
           $scope.recentGames = res.games;
 
           //for controlling ng-show directive in main.html
-          summoner.show = true;
-          summoner.error = false;
+          $scope.summoner.show = true;
+          $scope.summoner.error = false;
         })
         .error(function (error){
           console.log("Unable to get recent game data: " + error.message);

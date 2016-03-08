@@ -19,7 +19,7 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
+  /*border-bottom: 1px solid #e5e5e5;*/
   margin-bottom: 10px;
 }
 /* Make the masthead heading the same height as the navigation */
@@ -81,6 +81,21 @@ body {
     border-bottom: 0;
   }
 }
+
+
+
+
+/* for search bar */
+#searchInput {
+  width: 100%;
+}
+
+#searchArea button {
+  margin-top: 15px;
+  margin-bottom: 42px;
+}
+/* end of search bar */
+
 
 
 
