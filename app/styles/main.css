@@ -103,14 +103,33 @@ body {
 
 
 /* for search result page */
-.row {
+.spells img {
+  width: 20px;
+  height: 20px;
+}
+
+.items {
+  max-width: 250px;
+}
+.items img {
+  margin-bottom: 4px;
+  width: 42px;
+}
+
+md-list-item {
+  margin-top: 20px;
+  
+}
+md-divider {
+  margin-bottom: -8px;
+  
+  }
+/*.row {
   margin: 0;
   border-radius: 0;
 }
 
-.items img {
-  margin-bottom: 4px;
-}
+
 
 .champInfo {
 
@@ -130,16 +149,11 @@ body {
 .display-more {
   clear: left;
   float: right;
-}
+}*/
 
-/* remove search bar padding */
-#searchBar {
-  padding: 0;
-}
 
 
 /* for match page */
-
 table{
   margin: 0;
   padding: 0;
