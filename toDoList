@@ -1,4 +1,4 @@
-Current Goals - Due in 1 week - 02/24/16
+Current Goals - Due in 1 week - 03/14/16
 
 1. Create Unit Tests for the current backend
 2. Update routes with better handling for incorrect input or unregistered routes. //Completed
@@ -7,4 +7,4 @@ Current Goals - Due in 1 week - 02/24/16
 5. Add input validation(client side)
 6. Wrap simple graphs in directives
 7. Add middleware to track requests and limit number of requests
-8. Implement better logging, set standads. 
+8. Implement better logging, set standads.
