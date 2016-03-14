@@ -1,10 +1,8 @@
 var mongoose = require('mongoose');
 var express = require('express');
 
-////Imnportant KEY //////////////////////////////////////////////
 var https = 'https://';
-var key = '?api_key=29993728-af63-4ecd-84d8-fdd068d9d11a';
-////////////////////////////////////////////////////////////////
+var key = config.LeagueAPI.key;
 var Summoner = require('../models/summoner');
 var request = require('request');
 
