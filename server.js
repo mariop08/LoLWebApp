@@ -1,16 +1,12 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/leagueApp');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-  console.log("Connected to MongoDB");
-});
-
 var express = require('express');
 
 var bodyParser = require('body-parser');
 var Summoner = require('./models/summoner');
 var request = require('request');
+
+//Import Configuration Specifics
+var config = require('./config');
 
 //Provides route for Angular Web App
 var main = require('./routes/main')
@@ -39,6 +35,13 @@ app.use('/api/recentgame', recent);
 app.use('/api/matchlist', matchlist);
 app.use('/api/match', match);
 app.use('/', router);
+
+mongoose.connect('mongodb://localhost/leagueApp');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("Connected to MongoDB");
+});
 
 app.listen(port);
 console.log('The server is running at port: ' + port);

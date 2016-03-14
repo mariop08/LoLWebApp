@@ -1,28 +1,3 @@
-<!-- 
-<div>
-<div class="well" ng-show="summoner.show">
-  <div class="text-center">
-  	<h1><img src="{{summoner.profileIconSrc}}" width="40px" alt="profile icon"> {{summoner.username}} <small>{{summoner.id}}</small></h1>
-  	<span class="label label-default">Level {{summoner.level}}</span>
-  </div>
-  <h2>Masteries</h2>
-  <ol class="row">
-  	<li class="col-lg-6" ng-repeat="mastery in summoner.masteries">{{mastery.name}}</li>
-  </ol>
-  <h2>Runes</h2>
-  <ol class="row">
-  	<li class="col-lg-6" ng-repeat="rune in summoner.runes">{{rune.name}}</li>
-  </ol>
-</div>
-
-<div class="jumbotron" ng-show="summoner.error">
-	<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
-</div>
-</div>
--->
-
-
-
 <div ng-controller="SearchBarCtrl as search" ng-cloak="">
   <!--search bar for summoner name-->
   <div>
@@ -51,66 +26,67 @@
 
 
 <div ng-show="summoner.show">
-	<div class="row">
-		<div class="well col-md-12">
-			<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/{{summonerInfo.profileIconId}}.png " width="60" alt="Summoner profile icon">
-			<label>{{summonerInfo.name}}</label>
-		</div>
+	 
+	<div flex-xs flex-gt-xs="50" layout="column">
+		<md-card>
+		    <md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">{{summonerInfo.name}}</span>
+					<span class="md-subhead">Level {{summonerInfo.summonerLevel}}</span>
+				</md-card-title-text>
+				<md-card-title-media>
+					<div class="md-media-sm card-media"><img ng-src="http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/{{summonerInfo.profileIconId}}.png " width="60" alt="Summoner profile icon"></div>
+				</md-card-title-media>
+		    </md-card-title>
+		</md-card>
 	</div>
-	<div class="lists">
-		<div class="well row" ng-repeat="game in recentGames">
-			<div class="game-summary">
-				<div class="champInfo col-md-2">
-					<div class="champ">
-						<!-- need to work on getting the name of the champion by champion id -->
-						<!-- until then, we will get a static Malzahar face bc Malzahar is awesome -->
-						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Malzahar.png" width="50">
-						<label>{{game.championId}}</label>
-					</div>
-					<div class="spells">
-						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png" width="20">
-						<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png" width="20">
-					</div>
-				</div>
-				<div class="gametype col-md-2">
-					<p>{{game.gameMode == "CLASSIC" ? "Summoner's Rift" : game.gameMode}}</p>
-				</div>
-				<div class="items col-md-5">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item0}}.png" width="50">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item1}}.png" width="50">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item2}}.png" width="50">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item6}}.png" width="50">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item3}}.png" width="50">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item4}}.png" width="50">
-					<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item5}}.png" width="50">
-				</div>
-				<div class="kda col-md-1">
-					<p><strong>KDA</strong></p>
-					<p>{{game.stats.championsKilled}}/{{game.stats.numDeaths}}/{{game.stats.assists}}</p>
-				</div>
-				<div class="gold col-md-1">
-					<p><strong>Gold</strong></p>
-					<p>{{game.stats.goldEarned / 1000 | number:1}}k</p>
-				</div>
-				<div class="gametime col-md-1">
-					<!-- in the format minute:second -->
-					<p><strong>Time</strong></p>
-					<p>{{game.stats.timePlayed/60 | number:0}}:{{game.stats.timePlayed%60 | number:0}}</p>
-				</div>
-			</div>
-			<!-- matchid = {{game.gameID}}, need a function that takes in matchid as a parameter and calls the match api inside the ng-click-->
-			<a href="" ng-click=""><span class="display-more glyphicon glyphicon-menu-down"></span></a>
-		</div>
+
+	<md-content>
+	    <md-list>
+	      <md-subheader class="md-no-sticky">10 Most recent games</md-subheader>
+	      <md-list-item class="md-2-line" ng-repeat="game in recentGames">
+	        <div class="md-list-item-text" layout="row" layout-align="space-around center">
+	        	<div class="champ">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Malzahar.png" class="md-avatar" alt="">
+	        	</div>
+	        	<div class="spells" layout="column" layout-align="space-around center">
+	        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png">
+	        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png">
+	        	</div>
+	        	<div class="gametype col-md-2">
+	        		<p>{{game.gameMode == "CLASSIC" ? "Summoner's Rift" : game.gameMode}}</p>
+	        	</div>
+	        	<div class="items col-md-5">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item0}}.png">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item1}}.png">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item2}}.png">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item6}}.png">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item3}}.png">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item4}}.png">
+	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item5}}.png">
+	        	</div>
+	        	<div class="kda col-md-1">
+	        		<p><strong>KDA</strong></p>
+	        		<p>{{game.stats.championsKilled}}/{{game.stats.numDeaths}}/{{game.stats.assists}}</p>
+	        	</div>
+	        	<div class="gold col-md-1">
+	        		<p><strong>Gold</strong></p>
+	        		<p>{{game.stats.goldEarned / 1000 | number:1}}k</p>
+	        	</div>
+	        	<div class="gametime col-md-1">
+	        		<!-- in the format minute:second -->
+	        		<p><strong>Time</strong></p>
+	        		<p>{{game.stats.timePlayed/60 | number:0}}:{{game.stats.timePlayed%60 | number:0}}</p>
+	        	</div>
+	        <a href="" ng-click=""><span class="display-more glyphicon glyphicon-menu-down"></span></a>
+	        </div>
+
+	        <md-divider></md-divider>
+	      </md-list-item>
+	    </md-list>
+	</md-content>
+
+	<div class="jumbotron" ng-show="summoner.error">
+		<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
 	</div>
-</div>
-
-
-
-
-
-<div class="jumbotron" ng-show="summoner.error">
-	<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
-</div>
-
-
 </div>

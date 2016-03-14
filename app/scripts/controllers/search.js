@@ -11,7 +11,7 @@ leagueApp
   .controller('SearchBarCtrl', ['$scope' , 'summonerFactory' , function ($scope, summonerFactory) {
 
     $scope.selectedRegion = 'NA';
-    
+
 	  $scope.regions = [
 					  'NA',
 					  'KR',
@@ -29,11 +29,11 @@ leagueApp
 
 
 
-    $scope.dropDownSelectedItem = function(region){
-      $scope.selectedRegion = region;
+    // $scope.dropDownSelectedItem = function(region){
+    //   $scope.selectedRegion = region;
 
-      console.log($scope.selectedRegion);
-    };
+    //   console.log($scope.selectedRegion);
+    // };
 
     $scope.getMatchList = function(summoner) {
 
@@ -71,8 +71,7 @@ leagueApp
       // summoner.region = $scope.selectedRegion;
       summonerFactory.getRecentGame(summoner)
         .success(function(res) {
-          console.log(res);
-          console.log(res.summonerInfo.name);
+          console.log(res.summonerInfo);
           $scope.summonerInfo = res.summonerInfo;
           $scope.recentGames = res.games;
 
