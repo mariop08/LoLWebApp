@@ -11,5 +11,8 @@
     "express": "~4.13.1",
     "mongoose": "*",
     "request": "*"
+  },
+  "devDependencies": {
+    "supertest": "^1.2.0"
   }
 }
