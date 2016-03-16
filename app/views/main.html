@@ -2,8 +2,8 @@
   <!--search bar for summoner name-->
   <div>
     <h1 class="md-title">League App</h1>
-    <div layout="row" layout-align="center" id="searchArea">
-      
+     <form name="summonerForm" ng-submit="summonerForm.$valid && getRecentGame(summoner)">
+     <div layout="row" layout-align="center" id="searchArea">
       <md-input-container>
         <label>Region</label>
         <md-select ng-model="summoner.region">
@@ -15,12 +15,13 @@
       
       <md-input-container class="md-block" id="searchInput">
         <label>Summoner Name</label>
-        <input ng-model="summoner.name">
+        <input ng-model="summoner.name" ng-required="true">
       </md-input-container>
       
-      <md-button class="md-raised md-primary" ng-click="getRecentGame(summoner)">Search</md-button>
-    
+      <md-button class="md-raised md-primary" type="submit">Search</md-button>
     </div>
+    </form>
+
   </div>
   <!--search bar end-->
 
