@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var express = require('express');
+var config = require('../config');
 
 var https = 'https://';
 var key = config.LeagueAPI.key;
