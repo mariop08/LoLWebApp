@@ -8,7 +8,7 @@ var ChampionsVersionSchema = new mongoose.Schema({
 	type: String,
   version: String,
   date: Date,
-  numberOfChampions: Number,
+  numberOfChampions: Number
 },{collection: 'Champions'});
 
 module.exports = mongoose.model('ChampionsVersion', ChampionsVersionSchema);

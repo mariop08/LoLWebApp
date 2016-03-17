@@ -36,8 +36,8 @@ module.exports = {
 			  			}
 			  			//if version number is same, db doesn't need to be updated
 			  			else if(dbVersion.version === championJSON["version"]) {
-			  				console.log('Version up to date.');
-			  				console.log('Current version number: '+dbVersion.version);
+			  				console.log('Champions version up to date.');
+			  				console.log('Current champions version number: '+dbVersion.version);
 			  				console.log('Total ' + dbVersion.numberOfChampions + ' champions in db');
 			  			}
 			  			else if(dbVersion.version !== championJSON["version"]){
