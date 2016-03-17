@@ -16,10 +16,12 @@ var recent = require('./routes/recentgame');
 var matchlist = require('./routes/matchlist');
 var match = require('./routes/match');
 
-//Provides functions for saving champions static data to db
+//Provides functions for saving champions/spells static data to db
 var saveChampToDB = require('./app/scripts/saveChampionsToDB');
-
 var saveSpellToDB = require('./app/scripts/saveSpellsToDB');
+
+//Provides cron-like scheduling functions for running db updates
+var schedule = require('node-schedule');
 
 var app = express();
 
@@ -56,7 +58,10 @@ app.listen(port);
 console.log('The server is running at port: ' + port);
 
 
-//Calls the riot api for champions static data and saves the data to db
-saveChampToDB.saveToDB();
-saveSpellToDB.saveToDB();
-
+//runs every day at midnight, 0:0:0 
+var update = schedule.scheduleJob('0 0 0 * * *', function(){
+	console.log("Checking for update on " + new Date());
+	//Calls the riot api for champions static data and saves the data to db
+	saveChampToDB.saveToDB();
+	saveSpellToDB.saveToDB();
+});
