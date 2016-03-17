@@ -15,6 +15,7 @@ var main = require('./routes/main')
 var recent = require('./routes/recentgame');
 var matchlist = require('./routes/matchlist');
 var match = require('./routes/match');
+var saveChamp = require('./routes/saveChampionToDB');
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/', main);
 app.use('/api/recentgame', recent);
 app.use('/api/matchlist', matchlist);
 app.use('/api/match', match);
+app.use('/api/saveChampionToDB', saveChamp);
 app.use('/', router);
 
 mongoose.connect('mongodb://localhost/leagueApp');
