@@ -19,6 +19,8 @@ var match = require('./routes/match');
 //Provides functions for saving champions static data to db
 var saveChampToDB = require('./app/scripts/saveChampionsToDB');
 
+var saveSpellToDB = require('./app/scripts/saveSpellsToDB');
+
 var app = express();
 
 
@@ -56,4 +58,5 @@ console.log('The server is running at port: ' + port);
 
 //Calls the riot api for champions static data and saves the data to db
 saveChampToDB.saveToDB();
+saveSpellToDB.saveToDB();
 
