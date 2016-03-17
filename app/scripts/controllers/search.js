@@ -71,7 +71,7 @@ leagueApp
       // summoner.region = $scope.selectedRegion;
       summonerFactory.getRecentGame(summoner)
         .success(function(res) {
-          console.log(res.summonerInfo);
+          console.log(res);
           $scope.summonerInfo = res.summonerInfo;
           $scope.recentGames = res.games;
 
