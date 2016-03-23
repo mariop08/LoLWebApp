@@ -210,3 +210,15 @@ td:first-child, td:nth-child(2) {
   top: 100%;
   left: 0;
 }
+
+.search-bar {
+  margin-top: 2%;
+}
+
+.primary-color {
+  background: dodgerblue;
+}
+
+.primary-color span {
+  color:white;
+}

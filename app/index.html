@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
@@ -17,46 +17,46 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-  </head>
-  <body ng-app="leagueApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <md-content>
-      <div layout="row" ng-cloak>
-        <md-toolbar md-scroll-shrink ng-if="true">
-          <div class="md-toolbar-tools">
-          <md-button class="md-icon-button md-primary" aria-label="Settings">
-            <md-icon md-svg-src="images/ic_menu_white_24px.svg"></md-icon>
-          </md-button>
-          <span flex></span>
-            <span>League App</span>
-            <!-- fill up the space between left and right area -->
+</head>
+<body ng-app="leagueApp" layout="row">
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div layout="column" flex>
+
+    <md-toolbar ng-controller="SidebarCtrl as sidebar">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="toggle()">
+                <md-icon md-svg-src="images/ic_menu_white_24px.svg"></md-icon>
+            </md-button>
             <span flex></span>
-          </div>
-        </md-toolbar>
-      </div>
-
-      <div ng-view layout="row">
-        <!-- where all the templates from the views folder go in-->
-      </div>
-
-      <div class="footer">
-        <div class="container">
-          <p><span class="glyphicon glyphicon-heart"></span> from the RandomIdea Team</p>
+            <span>League App</span>
+            <span flex></span>
         </div>
-      </div>
+    </md-toolbar>
+
+    <div ng-view layout="row">
+        <!-- where all the templates from the views folder go in-->
+    </div>
+
+    <md-content layout="column" flex>
+        <div flex layout="column" layout-margin>
+            <div flex></div>
+            <footer flex="none" class="primary-color">
+                <div flex="100" flex-gt-sm="60"  flex-offset-gt-sm="45" flex-offset="20"><span>Brought to You from Ah Som and Mario</span></div>
+            </footer>
+        </div>
     </md-content>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <script>
+        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+                    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+                r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+        }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
+        ga('create', 'UA-XXXXX-X');
+        ga('send', 'pageview');
     </script>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -81,14 +81,16 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/match.js"></script>
-		    <script src="scripts/controllers/search.js"></script>
-        <script src="scripts/controllers/summonerFactory.js"></script>
-        <script src="scripts/matchChart.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/match.js"></script>
+    <script src="scripts/controllers/search.js"></script>
+    <script src="scripts/controllers/summonerFactory.js"></script>
+    <script src="scripts/controllers/sidebar.js"></script>
+    <script src="scripts/matchChart.js"></script>
+    <!-- endbuild -->
+</div>
 </body>
 </html>
