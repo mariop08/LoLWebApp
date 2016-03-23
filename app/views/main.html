@@ -84,12 +84,13 @@
 			      <md-subheader class="md-no-sticky">10 Most recent games</md-subheader>
 			      <md-list-item class="md-2-line" ng-repeat="game in recentGames">
 			        <div class="md-list-item-text" layout="row" layout-align="space-around center">
-			        	<div class="champ">
-			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Malzahar.png" class="md-avatar" alt="">
+			        	<div class="champ" layout="column">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/{{game.championKey}}.png" class="md-avatar" alt="">
+			        		{{game.championName}}
 			        	</div>
 			        	<div class="spells" layout="column" layout-align="space-around center">
-			        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png">
-			        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/{{game.spell1key}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/{{game.spell2key}}.png">
 			        	</div>
 			        	<div class="gametype col-md-2">
 			        		<p>{{game.gameMode == "CLASSIC" ? "Summoner's Rift" : game.gameMode}}</p>

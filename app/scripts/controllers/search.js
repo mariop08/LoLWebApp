@@ -8,7 +8,7 @@
  * Controller of the leagueApp
  */
 leagueApp
-  .controller('SearchBarCtrl', ['$scope' , 'summonerFactory' , function ($scope, summonerFactory) {
+  .controller('SearchBarCtrl', ['$scope' , '$filter', 'summonerFactory' , function ($scope, $filter, summonerFactory) {
 
     $scope.selectedRegion = 'NA';
 
@@ -74,6 +74,26 @@ leagueApp
           console.log(res);
           $scope.summonerInfo = res.summonerInfo;
           $scope.recentGames = res.games;
+
+          //go through each game object and append appropriate champion/spell info
+          for(var i=0; i<$scope.recentGames.length; i++) {
+            var currGame = $scope.recentGames[i];
+
+            var matchingChamp = $filter('filter')(res.championInfo, {id:currGame.championId}, true);
+            var matchingSpell1 = $filter('filter')(res.spellInfo, {id:currGame.spell1}, true);
+            var matchingSpell2 = $filter('filter')(res.spellInfo, {id:currGame.spell2}, true);
+
+            //append champion name/key
+            currGame.championKey = matchingChamp[0].key;
+            currGame.championName = matchingChamp[0].name;
+
+            //append spell name/key
+            currGame.spell1key = matchingSpell1[0].key;
+            currGame.spell1name = matchingSpell1[0].name;
+            currGame.spell2key = matchingSpell2[0].key;
+            currGame.spell2name = matchingSpell2[0].name;
+          }
+          
 
           //for controlling ng-show directive in main.html
           $scope.summoner.show = true;
