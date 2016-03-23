@@ -106,7 +106,7 @@
 			        	</div>
 			        	<div class="kda col-md-1">
 			        		<p><strong>KDA</strong></p>
-			        		<p>{{game.stats.championsKilled}}/{{game.stats.numDeaths}}/{{game.stats.assists}}</p>
+			        		<p>{{game.stats.championsKilled ? game.stats.championsKilled : 0}}/{{game.stats.numDeaths ? game.stats.numDeaths : 0}}/{{game.stats.assists ? game.stats.assists : 0}}</p>
 			        	</div>
 			        	<div class="gold col-md-1">
 			        		<p><strong>Gold</strong></p>
