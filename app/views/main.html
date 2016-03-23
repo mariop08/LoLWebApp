@@ -1,93 +1,131 @@
-<div ng-controller="SearchBarCtrl as search" ng-cloak="">
-  <!--search bar for summoner name-->
-  <div>
-    <h1 class="md-title">League App</h1>
-     <form name="summonerForm" ng-submit="summonerForm.$valid && getRecentGame(summoner)">
-     <div layout="row" layout-align="center" id="searchArea">
-      <md-input-container>
-        <label>Region</label>
-        <md-select ng-model="summoner.region">
-          <md-option ng-repeat="(index, region) in regions" value="{{region}}" ng-selected="{{region == selectedRegion}}">
-            {{region}}
-          </md-option>
-        </md-select>
-      </md-input-container>
-      
-      <md-input-container class="md-block" id="searchInput">
-        <label>Summoner Name</label>
-        <input ng-model="summoner.name" ng-required="true">
-      </md-input-container>
-      
-      <md-button class="md-raised md-primary" type="submit">Search</md-button>
-    </div>
-    </form>
+	<md-sidenav layout="column" class="md-sidenav-left" white-frame="10" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-component-id="left">
+      <md-toolbar class="md-tall md-hue-1">
+        <span flex></span>
+        <div layout="column" class="md-toolbar-tools-bottom inset">
+          <user-avatar></user-avatar>
+          <span></span>
+          <div>Firstname Lastname</div>
+          <div>email@domainname.com</div>
+        </div>
+      </md-toolbar>
+      <md-list>
+      <md-item ng-repeat="item in menu">
+        <a>
+          <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+            </div>
+            <div class="inset">{{item.title}}
+            </div>
+          </md-item-content>
+        </a>
+      </md-item>
+      <md-divider></md-divider>
+      <md-subheader>Lots of Other Stuff</md-subheader>
+      <md-item ng-repeat="item in admin">
+        <a>
+          <md-item-content md-ink-ripple layout="row" layout-align="start center">
+            <div class="inset">
+              <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+            </div>
+            <div class="inset">Champions
+            </div>
+          </md-item-content>
+        </a>
+      </md-item>
+    </md-list>
+    </md-sidenav>
 
-  </div>
-  <!--search bar end-->
+	<div ng-controller="SearchBarCtrl as search" ng-cloak="" layout="column" layout-fill role="main">
+	  <!--search bar for summoner name-->
+		  <div layout="row" layout-margin flex>
+		  	 <div flex="20"></div>
+		     <form name="summonerForm" ng-submit="summonerForm.$valid && getRecentGame(summoner)" flex>
+		     <div layout="row" layout-align="center" id="searchArea">
+		      <md-input-container>
+		        <label>Region</label>
+		        <md-select ng-model="summoner.region">
+		          <md-option ng-repeat="(index, region) in regions" value="{{region}}" ng-selected="{{region == selectedRegion}}">
+		            {{region}}
+		          </md-option>
+		        </md-select>
+		      </md-input-container>
+		      
+		      <md-input-container class="md-block" id="searchInput">
+		        <label>Summoner Name</label>
+		        <input ng-model="summoner.name" ng-required="true">
+		      </md-input-container>
+		      
+		      <md-button class="md-raised md-primary" type="submit">Search</md-button>
+		    </div>
+		    </form>
+		    <div flex="20"></div>
+		  </div>
+		  <!--search bar end-->
 
 
-<div ng-show="summoner.show">
-	 
-	<div flex-xs flex-gt-xs="50" layout="column">
-		<md-card>
-		    <md-card-title>
-				<md-card-title-text>
-					<span class="md-headline">{{summonerInfo.name}}</span>
-					<span class="md-subhead">Level {{summonerInfo.summonerLevel}}</span>
-				</md-card-title-text>
-				<md-card-title-media>
-					<div class="md-media-sm card-media"><img ng-src="http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/{{summonerInfo.profileIconId}}.png " width="60" alt="Summoner profile icon"></div>
-				</md-card-title-media>
-		    </md-card-title>
-		</md-card>
+		<div ng-show="summoner.show">
+			 
+			<div flex-xs flex-gt-xs="50" layout="column">
+				<md-card>
+				    <md-card-title>
+						<md-card-title-text>
+							<span class="md-headline">{{summonerInfo.name}}</span>
+							<span class="md-subhead">Level {{summonerInfo.summonerLevel}}</span>
+						</md-card-title-text>
+						<md-card-title-media>
+							<div class="md-media-sm card-media"><img ng-src="http://ddragon.leagueoflegends.com/cdn/6.3.1/img/profileicon/{{summonerInfo.profileIconId}}.png " width="60" alt="Summoner profile icon"></div>
+						</md-card-title-media>
+				    </md-card-title>
+				</md-card>
+			</div>
+
+			    <md-list>
+			      <md-subheader class="md-no-sticky">10 Most recent games</md-subheader>
+			      <md-list-item class="md-2-line" ng-repeat="game in recentGames">
+			        <div class="md-list-item-text" layout="row" layout-align="space-around center">
+			        	<div class="champ">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Malzahar.png" class="md-avatar" alt="">
+			        	</div>
+			        	<div class="spells" layout="column" layout-align="space-around center">
+			        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png">
+			        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png">
+			        	</div>
+			        	<div class="gametype col-md-2">
+			        		<p>{{game.gameMode == "CLASSIC" ? "Summoner's Rift" : game.gameMode}}</p>
+			        	</div>
+			        	<div class="items col-md-5">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item0}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item1}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item2}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item6}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item3}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item4}}.png">
+			        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item5}}.png">
+			        	</div>
+			        	<div class="kda col-md-1">
+			        		<p><strong>KDA</strong></p>
+			        		<p>{{game.stats.championsKilled}}/{{game.stats.numDeaths}}/{{game.stats.assists}}</p>
+			        	</div>
+			        	<div class="gold col-md-1">
+			        		<p><strong>Gold</strong></p>
+			        		<p>{{game.stats.goldEarned / 1000 | number:1}}k</p>
+			        	</div>
+			        	<div class="gametime col-md-1">
+			        		<!-- in the format minute:second -->
+			        		<p><strong>Time</strong></p>
+			        		<p>{{game.stats.timePlayed/60 | number:0}}:{{game.stats.timePlayed%60 | number:0}}</p>
+			        	</div>
+			        <a href="" ng-click=""><span class="display-more glyphicon glyphicon-menu-down"></span></a>
+			        </div>
+
+			        <md-divider></md-divider>
+			      </md-list-item>
+			    </md-list>
+		
+
+			<div class="jumbotron" ng-show="summoner.error">
+				<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
+			</div>
+		</div>
 	</div>
-
-	<md-content>
-	    <md-list>
-	      <md-subheader class="md-no-sticky">10 Most recent games</md-subheader>
-	      <md-list-item class="md-2-line" ng-repeat="game in recentGames">
-	        <div class="md-list-item-text" layout="row" layout-align="space-around center">
-	        	<div class="champ">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/champion/Malzahar.png" class="md-avatar" alt="">
-	        	</div>
-	        	<div class="spells" layout="column" layout-align="space-around center">
-	        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerHeal.png">
-	        		<img src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/spell/SummonerFlash.png">
-	        	</div>
-	        	<div class="gametype col-md-2">
-	        		<p>{{game.gameMode == "CLASSIC" ? "Summoner's Rift" : game.gameMode}}</p>
-	        	</div>
-	        	<div class="items col-md-5">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item0}}.png">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item1}}.png">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item2}}.png">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item6}}.png">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item3}}.png">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item4}}.png">
-	        		<img ng-src="http://ddragon.leagueoflegends.com/cdn/6.2.1/img/item/{{game.stats.item5}}.png">
-	        	</div>
-	        	<div class="kda col-md-1">
-	        		<p><strong>KDA</strong></p>
-	        		<p>{{game.stats.championsKilled}}/{{game.stats.numDeaths}}/{{game.stats.assists}}</p>
-	        	</div>
-	        	<div class="gold col-md-1">
-	        		<p><strong>Gold</strong></p>
-	        		<p>{{game.stats.goldEarned / 1000 | number:1}}k</p>
-	        	</div>
-	        	<div class="gametime col-md-1">
-	        		<!-- in the format minute:second -->
-	        		<p><strong>Time</strong></p>
-	        		<p>{{game.stats.timePlayed/60 | number:0}}:{{game.stats.timePlayed%60 | number:0}}</p>
-	        	</div>
-	        <a href="" ng-click=""><span class="display-more glyphicon glyphicon-menu-down"></span></a>
-	        </div>
-
-	        <md-divider></md-divider>
-	      </md-list-item>
-	    </md-list>
-	</md-content>
-
-	<div class="jumbotron" ng-show="summoner.error">
-		<p>I'm sorry, we couldn't find summoner with that name in the selected server</p>
-	</div>
-</div>
