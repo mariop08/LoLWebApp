@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var express = require('express');
-
 var bodyParser = require('body-parser');
+
+//Summoner model for manipulating summoner data
 var Summoner = require('./models/summoner');
 var request = require('request');
 
@@ -25,19 +26,17 @@ var schedule = require('node-schedule');
 
 var app = express();
 
-
-
-
-
+//Set HTML engine
 app.set('view engine', 'jade');
 
+//Set app static directory & bower component window
 app.use(express.static(__dirname + '/app'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var port = process.env.PORT || 8082;
+var port = process.env.PORT || config.port.dev;
 
 var router = express.Router();
 
