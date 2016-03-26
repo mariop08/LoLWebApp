@@ -104,8 +104,9 @@ body {
 
 /* for search result page */
 .spells img {
-  width: 20px;
-  height: 20px;
+  display: block;
+  width: 30px;
+  height: 30px;
 }
 
 .items {
@@ -113,7 +114,8 @@ body {
 }
 .items img {
   margin-bottom: 4px;
-  width: 42px;
+  width: 40px;
+
 }
 
 md-list-item {
@@ -221,4 +223,30 @@ td:first-child, td:nth-child(2) {
 
 .primary-color span {
   color:white;
+}
+
+.gametype{
+  display: table;
+}
+
+.gametype p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.champion {
+  display: table;
+}
+
+.champion p {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.champion img {
+  display: table-cell;
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
 }
