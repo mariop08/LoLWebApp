@@ -1,4 +1,7 @@
 # LoLWebApp
+
+###The goal is to provide a clean, resposive site with in-depth analysis on game data. Seeing your improvement is the goal.
+
 API Table
 ----------
 | Route | HTTP | Action |
